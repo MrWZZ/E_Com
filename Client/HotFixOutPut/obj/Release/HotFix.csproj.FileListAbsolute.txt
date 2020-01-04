@@ -1,0 +1,8 @@
+E:\WzzWorkSpace\UnityWork\E_com\Client\HotFixOutPut\obj\Release\HotFix.csprojAssemblyReference.cache
+E:\WzzWorkSpace\UnityWork\E_com\Client\HotFixOutPut\obj\Release\HotFix.csproj.CopyComplete
+E:\WzzWorkSpace\UnityWork\E_com\Client\HotFixOutPut\obj\Release\HotFix.dll
+E:\WzzWorkSpace\UnityWork\E_com\Client\HotFixOutPut\obj\Release\HotFix.pdb
+E:\WzzWorkSpace\UnityWork\E_com\Client\HotFixOutPut\HotFix.dll
+E:\WzzWorkSpace\UnityWork\E_com\Client\HotFixOutPut\HotFix.pdb
+E:\WzzWorkSpace\UnityWork\E_com\Client\HotFixOutPut\Release\HotFix.dll
+E:\WzzWorkSpace\UnityWork\E_com\Client\HotFixOutPut\Release\HotFix.pdb
