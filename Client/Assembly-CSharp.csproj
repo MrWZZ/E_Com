@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{12F44184-A422-5F27-22E6-507969043F15}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -63,14 +64,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\HotFix\Custom\IStatus.cs" />
-    <Compile Include="Assets\Scripts\HotFix\Custom\MoveController.cs" />
-    <Compile Include="Assets\Scripts\HotFix\Custom\RayTest.cs" />
-    <Compile Include="Assets\Scripts\HotFix\Custom\StatusController.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\BaseStatusComponent.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\GroupTestComponent.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\GroupTestOperate\BoxGroupTestOperate.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\GroupTestOperate\IGroupTestOperate.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\GroupTestOperate\SphereGroupTestOperate.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\LayerComponent.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\LayerManager.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\PlayerEntity.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\PlayerKeyboardControlComponent.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\PlayerStatusComponent.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\StatusOperate\DodgeStatusOperate.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\StatusOperate\FallStatusOperate.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\StatusOperate\IdelStatusOperate.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\StatusOperate\IStatusOperate.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\StatusOperate\JumpStatusOpreate.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\StatusOperate\MoveStatusOperate.cs" />
     <Compile Include="Assets\Scripts\HotFix\Framework\BaseComponent.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Framework\BaseEntity.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Framework\BaseOperate.cs" />
     <Compile Include="Assets\Scripts\HotFix\Framework\ConfigComponent.cs" />
     <Compile Include="Assets\Scripts\HotFix\Framework\DownLoadComponent.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Framework\IComponent.cs" />
     <Compile Include="Assets\Scripts\HotFix\Framework\LocalFileComponent.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Framework\Log.cs" />
     <Compile Include="Assets\Scripts\HotFix\Framework\MD5Component.cs" />
     <Compile Include="Assets\Scripts\HotFix\InitHotfix.cs" />
     <Compile Include="Assets\Scripts\HotFix\Properties\AssemblyInfo.cs" />

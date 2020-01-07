@@ -82,6 +82,7 @@
     <Compile Include="Assets\Editor\AssetBundleBrowser\Editor\MessageList.cs" />
     <Compile Include="Assets\Editor\AssetBundleBrowser\Editor\MessageSystem.cs" />
     <Compile Include="Assets\Editor\MD5Creator\MD5Creator.cs" />
+    <Compile Include="Assets\Editor\MeshCombine\MeshCombine.cs" />
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>E:/WzzWorkSpace/UnityWork/E_com/Client/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>

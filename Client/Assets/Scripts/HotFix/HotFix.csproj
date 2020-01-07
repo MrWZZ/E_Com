@@ -185,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Custom\IStatus.cs" />
+    <Compile Include="Custom\KeyboardController.cs" />
     <Compile Include="Custom\MoveController.cs" />
     <Compile Include="Custom\StatusController.cs" />
     <Compile Include="Framework\BaseComponent.cs" />
