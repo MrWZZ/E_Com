@@ -53,6 +53,7 @@ namespace Assets.Editor.MeshCombine
 
             Selection.activeObject = newMesh;
             AssetDatabase.Refresh();
+
         }
     }
 }

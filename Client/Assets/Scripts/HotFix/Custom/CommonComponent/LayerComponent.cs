@@ -14,13 +14,13 @@ namespace HotFix
 
     public class LayerComponent : BaseComponent
     {
-        private ILayerEntity entity;
+        private ILayerEntity Entity;
 
         public LayerComponent Init(ILayerEntity entity)
         {
-            this.entity = entity;
+            Entity = entity;
 
-            LayerManager.SetObjectAndChildsLayer(gameObject, this.entity.EntityLayer);
+            LayerManager.SetObjectAndChildsLayer(gameObject, Entity.EntityLayer);
 
             return this;
         }

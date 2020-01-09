@@ -30,7 +30,7 @@ namespace HotFix
             return this;
         }
 
-        public override void OnUpdate()
+        public void OnUpdate()
         {
             Debug.DrawLine(transform.position, transform.position - Vector3.down * 0.5f,Color.red,1f);
             GroupTestOperate.OnUpdate();

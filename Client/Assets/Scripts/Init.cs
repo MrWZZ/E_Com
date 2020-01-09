@@ -23,7 +23,7 @@ public class Init : MonoBehaviour
         {
             Debug.Log("on common model");
 
-            gameObject.AddComponent<HotFix.InitHotfix>();
+            gameObject.AddComponent<HotFix.InitEntity>();
         }
         DontDestroyOnLoad(gameObject);
     }
@@ -132,7 +132,7 @@ public class Init : MonoBehaviour
         TextAsset asset = bundle.LoadAsset("hotfix", typeof(TextAsset)) as TextAsset;
 
         var assembly = Assembly.Load(asset.bytes);
-        Type type = assembly.GetType("HotFix.InitHotfix");
+        Type type = assembly.GetType("HotFix.InitEntity");
         gameObject.AddComponent(type);
 
         Debug.Log("cur dll version:" + newestDllVersion.ToString());

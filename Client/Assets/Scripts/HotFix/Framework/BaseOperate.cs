@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HotFix
 {
-    public class BaseOperate
+    public abstract class BaseOperate
     {
 
     }

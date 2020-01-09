@@ -9,14 +9,6 @@ namespace HotFix
 {
     public abstract class BaseComponent : MonoBehaviour
     {
-        public virtual void OnUpdate()
-        {
 
-        }
-
-        public virtual void OnLateUpdate()
-        {
-
-        }
     }
 }

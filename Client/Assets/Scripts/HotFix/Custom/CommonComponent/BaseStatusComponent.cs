@@ -76,7 +76,7 @@ namespace HotFix
             return true;
         }
 
-        public override void OnUpdate()
+        public void OnUpdate()
         {
             curStatusOperate?.OnUpdate();
         }

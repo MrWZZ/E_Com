@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace HotFix
 {
-    public interface IComponent
+    public class LoginSceneEntity : BaseEntity
     {
-        void Init();
+        public void InitScene()
+        {
+
+        }
     }
 }

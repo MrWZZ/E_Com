@@ -23,7 +23,7 @@ namespace HotFix
             return this;
         }
 
-        public override void OnUpdate()
+        public void OnUpdate()
         {
             entity.PlayerStatusComponent.SetHV(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             //移动状态

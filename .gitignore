@@ -1,0 +1,9 @@
+.*
+!.gitignore
+
+Client/obj/Debug/
+Client/obj/Release/
+Client/Temp/
+Client/Library/
+Server/Server/bin/
+Server/Server/obj/

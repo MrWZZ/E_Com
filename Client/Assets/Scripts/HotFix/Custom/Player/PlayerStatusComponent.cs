@@ -46,22 +46,14 @@ namespace HotFix
         {
             Entity = entity;
 
-            IdelStatusOperate idelStatus = new IdelStatusOperate(this);
-            AddStatus(CharacterStatus.Idel, idelStatus);
-
-            MoveStatusOperate moveStatus = new MoveStatusOperate(this);
-            AddStatus(CharacterStatus.Move, moveStatus);
-
-            FallStatusOperate fallStatus = new FallStatusOperate(this);
-            AddStatus(CharacterStatus.Fall, fallStatus);
-
-            JumpStatusOpreate jumpStatus = new JumpStatusOpreate(this);
-            AddStatus(CharacterStatus.Jump, jumpStatus);
-
-            DodgeStatusOperate dodgeStatus = new DodgeStatusOperate(this);
-            AddStatus(CharacterStatus.Dodge, dodgeStatus);
+            AddStatus(CharacterStatus.Idel, new IdelStatusOperate(this));
+            AddStatus(CharacterStatus.Move, new MoveStatusOperate(this));
+            AddStatus(CharacterStatus.Fall, new FallStatusOperate(this));
+            AddStatus(CharacterStatus.Jump, new JumpStatusOpreate(this));
+            AddStatus(CharacterStatus.Dodge, new DodgeStatusOperate(this));
 
             TryChangeStatus(CharacterStatus.Idel);
+
             return this;
         }
 

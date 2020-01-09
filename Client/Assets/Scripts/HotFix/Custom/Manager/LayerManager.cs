@@ -12,7 +12,7 @@ namespace HotFix
         Player = 8,
     }
 
-    public class LayerManager
+    public static class LayerManager
     {
 
         /// <summary>
