@@ -1,0 +1,4 @@
+MainResourceReference,Assets/Game/Main/Assetbundle/Main_Bundle/Configs/MainResourceReference.txt
+MainSceneReference,Assets/Game/Main/Assetbundle/Main_Bundle/Configs/MainSceneReference.txt
+Eyes,Assets/Game/Main/Assetbundle/Main_Bundle/Materials/Eyes.mat
+Player,Assets/Game/Main/Assetbundle/Main_Bundle/Prefabs/Player.prefab
