@@ -8,32 +8,12 @@ using UnityEngine;
 namespace HotFix
 {
     public class MainSceneEntity : 
-        BaseEntity,
-        IResourcesReferenceEntity,
-        ISceneReferenceEntity
+        BaseSceneEntity
     {
-        public ResourcesReferenceComponent ResourcesReferenceComponent { get; private set; }
-        public SceneReferenceComponent SceneReferenceComponent { get; private set; }
 
-        public TextAsset SceneReferenceConfig => ResourcesReferenceComponent.LoadResources<TextAsset>("MainSceneReference", "Main_Bundle");
-
-        public void Awake()
+        public override void InitScene()
         {
-            InitScene();
-        }
-
-        public void InitScene()
-        {
-            ResourcesReferenceComponent = gameObject.AddComponent<ResourcesReferenceComponent>().Init(this);
-            SceneReferenceComponent = gameObject.AddComponent<SceneReferenceComponent>().Init(this);
-
-            GameObject playerPre = ResourcesReferenceComponent.LoadResources<GameObject>("Player", "Main_Bundle");
-            GameObject playerPos = SceneReferenceComponent.Get<GameObject>("PlayerPos");
-
-            var playerGo = Instantiate(playerPre);
-            playerGo.transform.SetParent(playerPos.transform);
-            playerGo.transform.localPosition = Vector3.zero;
-            playerGo.AddComponent<PlayerEntity>();
+            Log.Info("main scene init");
         }
     }
 }

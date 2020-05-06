@@ -1,7 +1,16 @@
 ManifestFileVersion: 0
-CRC: 3259639739
+CRC: 1499013635
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: hotfix
+      Name: main_scene
+      Dependencies: {}
+    Info_1:
+      Name: login_scene
+      Dependencies: {}
+    Info_2:
+      Name: loginpanel
+      Dependencies: {}
+    Info_3:
+      Name: login
       Dependencies: {}

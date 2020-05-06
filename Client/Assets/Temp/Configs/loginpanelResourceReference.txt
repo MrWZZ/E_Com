@@ -1,0 +1,1 @@
+Cube,Assets/Game/Login/AssetsBundle/LoginPanel_Bundle/Prefabs/Cube.prefab

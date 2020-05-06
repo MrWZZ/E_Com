@@ -19,7 +19,7 @@ public class SceneReferenceHierarchyEditor
         {
             GUIStyle style = new GUIStyle()
             {
-                padding = {left = EditorStyles.label.padding.left,top = EditorStyles.label.padding.top + 1},
+                padding = {left = EditorStyles.label.padding.left - 1,top = EditorStyles.label.padding.top + 1},
                 normal = { textColor = Color.blue},
                 fontSize = 10,
                 fontStyle = FontStyle.Bold

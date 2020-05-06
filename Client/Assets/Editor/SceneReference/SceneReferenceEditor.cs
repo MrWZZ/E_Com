@@ -9,22 +9,11 @@ using UnityEditor;
 [CustomEditor(typeof(SceneReference))]
 public class SceneReferenceEditor : Editor
 {
-    private static string SceneReferenceConfigPath
-    {
-        get
-        {
-            Scene curScene = SceneManager.GetActiveScene();
-            string path = curScene.path.Replace($"Scene/{curScene.name}.unity", $"Assetbundle/{curScene.name}_Bundle/Configs/{curScene.name}SceneReference.txt");
-            return path;
-        }
-    }
-
     private static Dictionary<string, GameObject> referenceObjDic = new Dictionary<string, GameObject>();
 
     public void OnEnable()
     {
-        referenceObjDic.Clear();
-        ReadReferenceConfig();
+        UpdateReference();
     }
 
     public override void OnInspectorGUI()
@@ -37,104 +26,28 @@ public class SceneReferenceEditor : Editor
         }
     }
 
-    [MenuItem("SceneReference/CreateConfig", priority = 0)]
-    public static void CreateConfig()
+    public static void UpdateReference()
     {
-        Dictionary<string, Transform> checkSameKeyDic = new Dictionary<string, Transform>();
-
-        Object[] SceneReferenceObjArr = FindObjectsOfType(typeof(SceneReferenceUnit));
-        StringBuilder transPath = new StringBuilder();
-
-        foreach (var sceneReferenceObj in SceneReferenceObjArr)
+        referenceObjDic.Clear();
+        SceneReferenceUnit[] gameObjects = FindObjectsOfType<SceneReferenceUnit>();
+        if(gameObjects.Length > 0)
         {
-            transPath.Insert(0, "\n");
-            //遍历层级结构，获取路径
-            Transform curTrans = ((SceneReferenceUnit)sceneReferenceObj).transform;
-            
-            //检查是否存在相同key
-            if (checkSameKeyDic.ContainsKey(curTrans.name))
+            foreach (var unit in gameObjects)
             {
-                Selection.objects = new Object[] { checkSameKeyDic[curTrans.name].gameObject, curTrans.gameObject };
-                Debug.LogError($"{curTrans.name}：场景中存在相同名字的引用，请修改名称后重新生成。");
-                return;
-            } 
-
-            checkSameKeyDic.Add(curTrans.name, curTrans);
-
-            while (curTrans != null)
-            {
-                transPath.Insert(0, curTrans.name);
-                if (curTrans.parent != null)
+                if(referenceObjDic.ContainsKey(unit.name))
                 {
-                    transPath.Insert(0, "/");
+                    Debug.Log($"场景中存在相同名字的SR引用：{unit.name}");
+                    continue;
                 }
-                curTrans = curTrans.parent;
+                else
+                {
+                    referenceObjDic.Add(unit.name, unit.gameObject);
+                }
             }
-            transPath.Insert(0, sceneReferenceObj.name + ",");
-        }
-        //删除末尾的回车
-        if(transPath.Length > 0)
-        {
-            transPath.Remove(transPath.Length - 1, 1);
-        }
-
-        using (FileStream fs = new FileStream(SceneReferenceConfigPath, FileMode.Create))
-        {
-            byte[] buff = Encoding.UTF8.GetBytes(transPath.ToString());
-            fs.Write(buff, 0, buff.Length);
-        }
-
-        AssetDatabase.Refresh();
-    }
-
-    private static void ReadReferenceConfig()
-    {
-        if (!File.Exists(SceneReferenceConfigPath))
-        {
-            return;
-        }
-
-        string[] contentLines = File.ReadAllLines(SceneReferenceConfigPath);
-        foreach (var line in contentLines)
-        {
-            if (string.IsNullOrEmpty(line))
-            {
-                continue;
-            }
-
-            string[] lineArr = line.Split(',');
-
-            GameObject targetObj;
-
-            int rootIndex = lineArr[1].IndexOf("/");
-            if (rootIndex > -1)
-            {
-                string rootObjName = lineArr[1].Substring(0, rootIndex);
-                GameObject rootObj = GameObject.Find(rootObjName);
-                string childPath = lineArr[1].Remove(0, rootIndex + 1);
-                targetObj = rootObj.transform.Find(childPath).gameObject;
-            }
-            else
-            {
-                targetObj = GameObject.Find(lineArr[1]);
-            }
-
-            if (targetObj.GetComponent<SceneReferenceUnit>() == null)
-            {
-                targetObj.AddComponent<SceneReferenceUnit>();
-            }
-
-            if (referenceObjDic.ContainsKey(lineArr[0]))
-            {
-                Debug.LogError($"场景中存在相同名字的引用:{lineArr[0]},{lineArr[1]}");
-                continue;
-            }
-
-            referenceObjDic.Add(lineArr[0], targetObj);
         }
     }
 
-    [MenuItem("GameObject/AddSceneReference", priority = 0)]
+    [MenuItem("GameObject/SceneReference/Add", priority = 0)]
     public static void AddSceneReference()
     {
         GameObject selectObj = Selection.activeGameObject;
@@ -143,18 +56,11 @@ public class SceneReferenceEditor : Editor
             return;
         }
 
-        //如果里面没有引用，先读取，确保下面的判断存在依据
-        if(referenceObjDic.Count == 0)
-        {
-            referenceObjDic.Clear();
-            ReadReferenceConfig();
-        }
-
         //检查是否存在相同key
         if (referenceObjDic.ContainsKey(selectObj.name))
         {
             Selection.objects = new Object[] { referenceObjDic[selectObj.name].gameObject, selectObj.gameObject };
-            Debug.LogError($"{selectObj.name}：场景中存在相同名字的引用，请修改名称后重新添加。");
+            Debug.Log($"场景中存在相同名字的引用，请修改名称后重新添加: {selectObj.name}");
             return;
         }
 
@@ -163,10 +69,10 @@ public class SceneReferenceEditor : Editor
             selectObj.AddComponent<SceneReferenceUnit>();
         }
 
-        CreateConfig();
+        UpdateReference();
     }
 
-    [MenuItem("GameObject/RemoveSceneReference", priority = 0)]
+    [MenuItem("GameObject/SceneReference/Remove", priority = 0)]
     public static void RemoveSceneReference()
     {
         GameObject selectObj = Selection.activeGameObject;
@@ -181,6 +87,6 @@ public class SceneReferenceEditor : Editor
             DestroyImmediate(unit);
         }
 
-        CreateConfig();
+        UpdateReference();
     }
 }

@@ -6,25 +6,19 @@ using System.IO;
 
 public class StandardFolder 
 {
-    [MenuItem("Assets/CreateGameFolder", priority = 999)]
+    [MenuItem("Assets/StandardFolder/GameFolder", priority = 999)]
     public static void CreateGameFolder()
     {
         Object folder = Selection.activeObject;
         string path = AssetDatabase.GetAssetPath(folder);
 
-        //资源
-        CreateSceneBundleFolderOperate($"{path}/Assetbundle/{folder.name}_Bundle");
-        
-        //场景
-        if (!Directory.Exists($"{path}/Scene"))
-        {
-            Directory.CreateDirectory($"{path}/Scene");
-        }
+        CreateRawResourcesFolder(path);
+        CreateSceneBundleFolderOperate($"{path}/AssetsBundle/{folder.name}_Bundle");
 
         AssetDatabase.Refresh();
     }
 
-    [MenuItem("Assets/CreateSceneBundleFolder",priority = 999)]
+    [MenuItem("Assets/StandardFolder/BundleFolder", priority = 999)]
     public static void CreateSceneBundleFolder()
     {
         Object folder = Selection.activeObject;
@@ -33,29 +27,31 @@ public class StandardFolder
         CreateSceneBundleFolderOperate(path);
     }
 
+    private static void CreateRawResourcesFolder(string path)
+    {
+        CreateDirectory($"{path}/Scene");
+        CreateDirectory($"{path}/RawAssets");
+    }
+
     private static void CreateSceneBundleFolderOperate(string path)
     {
         //配置文件
-        if (!Directory.Exists($"{path}/Configs"))
-        {
-            Directory.CreateDirectory($"{path}/Configs");
-        }
+        CreateDirectory($"{path}/Configs");
         //材质
-        if (!Directory.Exists($"{path}/Materials"))
-        {
-            Directory.CreateDirectory($"{path}/Materials");
-        }
+        CreateDirectory($"{path}/Materials");
         //预制体
-        if (!Directory.Exists($"{path}/Prefabs"))
-        {
-            Directory.CreateDirectory($"{path}/Prefabs");
-        }
+        CreateDirectory($"{path}/Prefabs");
         //图片
-        if (!Directory.Exists($"{path}/Sprites"))
-        {
-            Directory.CreateDirectory($"{path}/Sprites");
-        }
+        CreateDirectory($"{path}/Sprites");
 
         AssetDatabase.Refresh();
+    }
+
+    private static void CreateDirectory(string path)
+    {
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
     }
 }

@@ -7,21 +7,18 @@ using UnityEngine;
 
 namespace HotFix
 {
-    public interface ILayerEntity
+    public interface ILayerComponent
     {
         LayerEnum EntityLayer { get; }
     }
 
     public class LayerComponent : BaseComponent
     {
-        private ILayerEntity Entity;
-
-        public LayerComponent Init(ILayerEntity entity)
+        public ILayerComponent Entity;
+        public LayerComponent Init(ILayerComponent entity)
         {
             Entity = entity;
-
             LayerManager.SetObjectAndChildsLayer(gameObject, Entity.EntityLayer);
-
             return this;
         }
     }

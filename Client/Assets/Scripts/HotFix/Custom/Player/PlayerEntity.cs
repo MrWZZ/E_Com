@@ -12,7 +12,7 @@ namespace HotFix
         IGroupTestEntity,
         IPlayerKeyboardControlEntity,
         IPlayerStatusEntity,
-        ILayerEntity
+        ILayerComponent
     {
         public PlayerStatusComponent PlayerStatusComponent { get; private set; }
         public PlayerKeyboardControlComponent PlayerKeyboardControlComponent { get; private set; }
@@ -29,6 +29,11 @@ namespace HotFix
 
 
         public void Awake()
+        {
+            InitEntity();
+        }
+
+        public override void InitEntity()
         {
             InitData();
             AddComponent();
@@ -57,6 +62,5 @@ namespace HotFix
             PlayerKeyboardControlComponent.OnUpdate();
             PlayerStatusComponent.OnUpdate();
         }
-
     }
 }
