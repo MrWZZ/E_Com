@@ -1,16 +1,16 @@
 ManifestFileVersion: 0
-CRC: 1499013635
+CRC: 2343412316
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: main_scene
+      Name: login
       Dependencies: {}
     Info_1:
-      Name: login_scene
+      Name: main_scene
       Dependencies: {}
     Info_2:
-      Name: loginpanel
+      Name: login_scene
       Dependencies: {}
     Info_3:
-      Name: login
+      Name: main
       Dependencies: {}

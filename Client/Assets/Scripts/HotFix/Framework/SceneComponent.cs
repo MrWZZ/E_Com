@@ -49,13 +49,17 @@ namespace HotFix
         private IEnumerator LoadSceneAsync<T>(string sceneName, string sceneBundleName, Action<float> onProgress = null) where T : BaseSceneEntity
         {
             AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
-            asyncOperation.allowSceneActivation = true;
-
-            while(!asyncOperation.isDone)
+            
+            asyncOperation.allowSceneActivation = false;
+            while (asyncOperation.progress < 0.9f)
             {
                 onProgress?.Invoke(asyncOperation.progress);
                 yield return null;
             }
+
+            asyncOperation.allowSceneActivation = true;
+            yield return asyncOperation;
+            onProgress?.Invoke(1);
 
             // 默认向场景的第一个根物体挂载场景启动脚本
             Scene curScene = SceneManager.GetActiveScene();

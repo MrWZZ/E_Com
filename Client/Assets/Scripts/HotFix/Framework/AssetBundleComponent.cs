@@ -35,6 +35,8 @@ namespace HotFix
         {
             if (!Global.GlobalConfig.isUseAssetBundle) { return null; }
 
+            if(assetbundleDic.ContainsKey(bundleName)) { return null; }
+
             string bundleLocalPath = Entity.FilePathComponent.GetLocalAssetBundlePath(bundleName);
             AssetBundle assetBundle = AssetBundle.LoadFromFile(bundleLocalPath);
 
@@ -62,10 +64,6 @@ namespace HotFix
             {
                 assetBundle.Unload(false);
                 assetbundleDic.Remove(bundleName);
-            }
-            else
-            {
-                Log.Warning($"AssetBundle不存在，无需卸载：{bundleName}");
             }
 
         }

@@ -103,7 +103,6 @@
     <Compile Include="Assets\Scripts\Origin\Tool\SceneReference.cs" />
     <Compile Include="Assets\Scripts\Origin\Tool\SceneReferenceUnit.cs" />
     <None Include="Assets\Temp\Configs\loginResourceReference.txt" />
-    <None Include="Assets\Temp\Configs\loginpanelResourceReference.txt" />
     <None Include="Assets\Temp\Configs\mainResourceReference.txt" />
     <Reference Include="Unity.DocZh.Editor">
       <HintPath>E:/WzzWorkSpace/UnityWork/E_com/Client/Library/ScriptAssemblies/Unity.DocZh.Editor.dll</HintPath>

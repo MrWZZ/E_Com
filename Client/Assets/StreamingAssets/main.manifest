@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2102573493
+CRC: 2279093941
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 5403838357ebcaf1b413526936d4ed4d
+    Hash: a48bb9e21a2206cfa84d8dc8cae5b917
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 325b919d59b75d3b9845518feb178a56
+    Hash: f48bbdb587750f1d58fa689baccc429b
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -27,8 +27,6 @@ ClassTypes:
   Script: {fileID: 11500000, guid: d36710383271c0d438f9b830e668e734, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5b0e3f8db1f47c94b82a0069fa129ea0, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 38c206ae6f3f8ef4ab622531bebd0f0f, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -40,5 +38,5 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/Game/Login/AssetsBundle/Login_Bundle/Panels/LoginPanel.prefab
+- Assets/Game/Main/AssetsBundle/Main_Bundle/Panels/MainPanel.prefab
 Dependencies: []
