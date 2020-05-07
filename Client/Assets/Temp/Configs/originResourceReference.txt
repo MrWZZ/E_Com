@@ -1,0 +1,1 @@
+SceneLoadingPanel,Assets/Game/Origin/AssetsBundle/Origin_Bundle/Panels/SceneLoadingPanel.prefab

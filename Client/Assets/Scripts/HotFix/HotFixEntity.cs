@@ -18,9 +18,7 @@ namespace HotFix
         public void Awake()
         {
             InitEntity();
-            PanelComponent.CreateUIGroup();
-
-            Global.LoadScene<LoginSceneEntity>("Login", "login_scene");
+            gameObject.AddComponent<OriginSceneEntity>().InitScene();
         }
 
         public override void InitEntity()

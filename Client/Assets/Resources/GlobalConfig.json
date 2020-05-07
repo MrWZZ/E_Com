@@ -1,7 +1,7 @@
 {
   "isOnLine" : false,
   "isUseDll" : false,
-  "isUseAssetBundle" : true,
+  "isUseAssetBundle" : false,
   "serverInitUrl" : "http://127.0.0.1:9999/init",
   "clientVersion" : "1.0.0",
   "scriptVersion" : "1.0.0"

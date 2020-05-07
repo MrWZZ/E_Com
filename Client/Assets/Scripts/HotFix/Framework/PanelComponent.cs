@@ -24,9 +24,10 @@ namespace HotFix
         public override void InitComponent()
         {
             uiLayerDic = new Dictionary<UILayerEnum, UILayerData>();
+            CreateUIGroup();
         }
 
-        public void CreateUIGroup()
+        private void CreateUIGroup()
         {
             GameObject canvasObj = new GameObject("Canvas");
             DontDestroyOnLoad(canvasObj);

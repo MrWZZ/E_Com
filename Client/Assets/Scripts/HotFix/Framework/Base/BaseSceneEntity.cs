@@ -86,7 +86,6 @@ namespace HotFix
             var rr = GetComponent<ResourceReference>();
             if(rr == null)
             {
-                Log.Warning($"{name}没有依附资源引用。");
                 dependBundleList = new List<string>();
                 return;
             }

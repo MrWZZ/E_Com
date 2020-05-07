@@ -25,10 +25,10 @@ namespace HotFix
             }
         }
 
-        public static void LoadScene<T>(string sceneName, string sceneBundleName, Action<float> onProgress = null) 
+        public static void LoadScene<T>(string sceneName, string sceneBundleName) 
             where T : BaseSceneEntity
         {
-            _HotFixEntity.SceneComponent.Load<T>(sceneName, sceneBundleName, onProgress);
+            _HotFixEntity.SceneComponent.Load<T>(sceneName, sceneBundleName);
         }
 
         public static T LoadAsset<T>(string fileName, string bundleName) where T : UnityEngine.Object
@@ -36,9 +36,10 @@ namespace HotFix
             return _HotFixEntity.AssetBundleComponent.LoadAsset<T>(fileName, bundleName);
         }
 
-        public static void OpenPanel<T>(GameObject panelPre, UILayerEnum uiLayer = UILayerEnum.Center, object args = null) where T : BasePanelEntity
+        public static T OpenPanel<T>(GameObject panelPre, UILayerEnum uiLayer = UILayerEnum.Center, object args = null) 
+            where T : BasePanelEntity
         {
-            _HotFixEntity.PanelComponent.OpenPanel<T>(panelPre, uiLayer, args);
+            return _HotFixEntity.PanelComponent.OpenPanel<T>(panelPre, uiLayer, args);
         }
 
         public static void ClosePanel(string panelName, UILayerEnum uiLayer = UILayerEnum.Center)

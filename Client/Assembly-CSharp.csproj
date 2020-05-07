@@ -83,6 +83,8 @@
     <Compile Include="Assets\Scripts\HotFix\Custom\Scene\LoginScene\LoginSceneEntity.cs" />
     <Compile Include="Assets\Scripts\HotFix\Custom\Scene\MainScene\MainPanelEntity.cs" />
     <Compile Include="Assets\Scripts\HotFix\Custom\Scene\MainScene\MainSceneEntity.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\Scene\OriginScene\OriginSceneEntity.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\Scene\OriginScene\SceneLoadingPanelEntity.cs" />
     <Compile Include="Assets\Scripts\HotFix\Framework\AssetBundleComponent.cs" />
     <Compile Include="Assets\Scripts\HotFix\Framework\Base\BaseComponent.cs" />
     <Compile Include="Assets\Scripts\HotFix\Framework\Base\BaseEntity.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="Assets\Scripts\HotFix\Framework\Global.cs" />
     <Compile Include="Assets\Scripts\HotFix\Framework\PanelComponent.cs" />
     <Compile Include="Assets\Scripts\HotFix\Framework\SceneComponent.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Framework\Tool\CoroutineComponent.cs" />
     <Compile Include="Assets\Scripts\HotFix\Framework\Tool\Log.cs" />
     <Compile Include="Assets\Scripts\HotFix\HotFixEntity.cs" />
     <Compile Include="Assets\Scripts\HotFix\Properties\AssemblyInfo.cs" />
@@ -104,6 +107,7 @@
     <Compile Include="Assets\Scripts\Origin\Tool\SceneReferenceUnit.cs" />
     <None Include="Assets\Temp\Configs\loginResourceReference.txt" />
     <None Include="Assets\Temp\Configs\mainResourceReference.txt" />
+    <None Include="Assets\Temp\Configs\originResourceReference.txt" />
     <Reference Include="Unity.DocZh.Editor">
       <HintPath>E:/WzzWorkSpace/UnityWork/E_com/Client/Library/ScriptAssemblies/Unity.DocZh.Editor.dll</HintPath>
     </Reference>

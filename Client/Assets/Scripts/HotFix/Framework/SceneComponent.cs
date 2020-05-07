@@ -19,6 +19,9 @@ namespace HotFix
     {
         public BaseSceneEntity CurScene { get; private set; }
         private Dictionary<string, SceneData> sceneDataDic;
+        public Action OnLoadSceneStart;
+        public Action<float> OnLoadSceneProgress;
+        public Action OnLoadSceneEnd;
 
         public override void InitComponent()
         {
@@ -40,26 +43,24 @@ namespace HotFix
             sceneDataDic.Add(sceneName, data);
         }
 
-        public void Load<T>(string sceneName,string sceneBundleName,Action<float> onProgress = null) where T : BaseSceneEntity
+        public void Load<T>(string sceneName,string sceneBundleName) where T : BaseSceneEntity
         {
+            OnLoadSceneStart?.Invoke();
             Entity.AssetBundleComponent.LoadAssetsBundle(sceneBundleName);
-            StartCoroutine(LoadSceneAsync<T>(sceneName, sceneBundleName, onProgress));
+            StartCoroutine(LoadSceneAsync<T>(sceneName, sceneBundleName));
         }
 
-        private IEnumerator LoadSceneAsync<T>(string sceneName, string sceneBundleName, Action<float> onProgress = null) where T : BaseSceneEntity
+        private IEnumerator LoadSceneAsync<T>(string sceneName, string sceneBundleName) where T : BaseSceneEntity
         {
             AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
             
-            asyncOperation.allowSceneActivation = false;
-            while (asyncOperation.progress < 0.9f)
+            asyncOperation.allowSceneActivation = true;
+            while (!asyncOperation.isDone)
             {
-                onProgress?.Invoke(asyncOperation.progress);
+                OnLoadSceneProgress?.Invoke(asyncOperation.progress);
                 yield return null;
             }
-
-            asyncOperation.allowSceneActivation = true;
-            yield return asyncOperation;
-            onProgress?.Invoke(1);
+            OnLoadSceneEnd?.Invoke();
 
             // 默认向场景的第一个根物体挂载场景启动脚本
             Scene curScene = SceneManager.GetActiveScene();
