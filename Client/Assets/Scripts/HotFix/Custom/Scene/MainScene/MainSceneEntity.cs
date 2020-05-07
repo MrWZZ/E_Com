@@ -7,13 +7,13 @@ using UnityEngine;
 
 namespace HotFix
 {
-    public class MainSceneEntity : 
-        BaseSceneEntity
+    public class MainSceneEntity : BaseSceneEntity
     {
 
         public override void InitScene()
         {
-            Log.Info("main scene init");
+            GameObject mainPanel = Global.LoadAsset<GameObject>("MainPanel", "main");
+            Global.OpenPanel<MainPanelEntity>(mainPanel);
         }
     }
 }

@@ -12,14 +12,9 @@ namespace HotFix
     {
         public override void InitScene()
         {
-            SetClick("Button", OnClickButton);
-            GameObject cude = Global.LoadAsset<GameObject>("Cube", "login");
-            Instantiate(cude);
+            var loginPanel = Global.LoadAsset<GameObject>("LoginPanel", "login");
+            Global.OpenPanel<LoginPanelEntity>(loginPanel);
         }
 
-        public void OnClickButton()
-        {
-            Global.LoadScene<MainSceneEntity>("Main", "main_scene");
-        }
     }
 }

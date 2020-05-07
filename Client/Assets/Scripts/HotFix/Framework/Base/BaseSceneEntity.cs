@@ -63,7 +63,7 @@ namespace HotFix
         private void GetSceneReference()
         {
             sceneReferenceDic = new Dictionary<string, List<GameObject>>();
-            SceneReferenceUnit[] sceneReferenceUnits = GetComponentsInChildren<SceneReferenceUnit>();
+            SceneReferenceUnit[] sceneReferenceUnits = GetComponentsInChildren<SceneReferenceUnit>(true);
             foreach (var unit in sceneReferenceUnits)
             {
                 List<GameObject> sr = null;

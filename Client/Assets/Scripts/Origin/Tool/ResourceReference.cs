@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class ResourceReference : MonoBehaviour
 {
-    public List<string> dependBundleList;
+    public List<string> dependBundleList = new List<string>();
 }

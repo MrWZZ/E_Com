@@ -18,10 +18,26 @@ namespace HotFix
     public class SceneComponent : BaseComponent<ISceneEntity>
     {
         public BaseSceneEntity CurScene { get; private set; }
+        private Dictionary<string, SceneData> sceneDataDic;
 
         public override void InitComponent()
         {
-            
+            sceneDataDic = new Dictionary<string, SceneData>();
+        }
+
+        public void RegisterScene<SceneType>(string sceneName,string sceneBundleName) where SceneType : BaseSceneEntity
+        {
+            if(sceneDataDic.ContainsKey(sceneName))
+            {
+                Log.Warning($"{sceneName}场景已被注册，无法重复注册。");
+                return;
+            }
+
+            SceneData data = new SceneData();
+            data.sceneName = sceneName;
+            data.sceneBundleName = sceneBundleName;
+            data.sceneEnityType = typeof(SceneType);
+            sceneDataDic.Add(sceneName, data);
         }
 
         public void Load<T>(string sceneName,string sceneBundleName,Action<float> onProgress = null) where T : BaseSceneEntity
@@ -62,5 +78,12 @@ namespace HotFix
                 Entity.AssetBundleComponent.UnLoadAssetBundle(sceneBundleName);
             }
         }
+    }
+
+    public class SceneData
+    {
+        public string sceneName;
+        public string sceneBundleName;
+        public Type sceneEnityType;
     }
 }

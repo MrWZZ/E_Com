@@ -36,6 +36,16 @@ namespace HotFix
             return _HotFixEntity.AssetBundleComponent.LoadAsset<T>(fileName, bundleName);
         }
 
+        public static void OpenPanel<T>(GameObject panelPre, UILayerEnum uiLayer = UILayerEnum.Center, object args = null) where T : BasePanelEntity
+        {
+            _HotFixEntity.PanelComponent.OpenPanel<T>(panelPre, uiLayer, args);
+        }
+
+        public static void ClosePanel(string panelName, UILayerEnum uiLayer = UILayerEnum.Center)
+        {
+            _HotFixEntity.PanelComponent.ClosePanel(panelName, uiLayer);
+        }
+
         public static void LoadAssetsBundle(string bundleName)
         {
             _HotFixEntity.AssetBundleComponent.LoadAssetsBundle(bundleName);

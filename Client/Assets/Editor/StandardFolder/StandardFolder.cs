@@ -43,6 +43,8 @@ public class StandardFolder
         CreateDirectory($"{path}/Prefabs");
         //图片
         CreateDirectory($"{path}/Sprites");
+        //面板
+        CreateDirectory($"{path}/Panels");
 
         AssetDatabase.Refresh();
     }

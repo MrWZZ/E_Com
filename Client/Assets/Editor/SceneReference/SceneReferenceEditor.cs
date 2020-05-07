@@ -9,10 +9,12 @@ using UnityEditor;
 [CustomEditor(typeof(SceneReference))]
 public class SceneReferenceEditor : Editor
 {
-    private static Dictionary<string, GameObject> referenceObjDic = new Dictionary<string, GameObject>();
+    private static Dictionary<string, List<GameObject>> referenceObjDic = new Dictionary<string, List<GameObject>>();
+    private static SceneReference sceneReference;
 
     public void OnEnable()
     {
+        sceneReference = target as SceneReference;
         UpdateReference();
     }
 
@@ -22,27 +24,31 @@ public class SceneReferenceEditor : Editor
 
         foreach (var pair in referenceObjDic)
         {
-            EditorGUILayout.ObjectField(pair.Key, pair.Value, typeof(GameObject), true);
+            var curList = pair.Value;
+            foreach (var go in curList)
+            {
+                EditorGUILayout.ObjectField(go.name, go, typeof(GameObject), true);
+            }
         }
     }
 
     public static void UpdateReference()
     {
         referenceObjDic.Clear();
-        SceneReferenceUnit[] gameObjects = FindObjectsOfType<SceneReferenceUnit>();
+        if(sceneReference == null) { return; }
+        SceneReferenceUnit[] gameObjects = sceneReference.gameObject.GetComponentsInChildren<SceneReferenceUnit>(true);
         if(gameObjects.Length > 0)
         {
             foreach (var unit in gameObjects)
             {
-                if(referenceObjDic.ContainsKey(unit.name))
+                List<GameObject> curList;
+                referenceObjDic.TryGetValue(unit.name,out curList);
+                if(curList == null)
                 {
-                    Debug.Log($"场景中存在相同名字的SR引用：{unit.name}");
-                    continue;
+                    curList = new List<GameObject>();
+                    referenceObjDic.Add(unit.name, curList);
                 }
-                else
-                {
-                    referenceObjDic.Add(unit.name, unit.gameObject);
-                }
+                curList.Add(unit.gameObject);
             }
         }
     }
@@ -53,14 +59,6 @@ public class SceneReferenceEditor : Editor
         GameObject selectObj = Selection.activeGameObject;
         if (selectObj == null)
         {
-            return;
-        }
-
-        //检查是否存在相同key
-        if (referenceObjDic.ContainsKey(selectObj.name))
-        {
-            Selection.objects = new Object[] { referenceObjDic[selectObj.name].gameObject, selectObj.gameObject };
-            Debug.Log($"场景中存在相同名字的引用，请修改名称后重新添加: {selectObj.name}");
             return;
         }
 

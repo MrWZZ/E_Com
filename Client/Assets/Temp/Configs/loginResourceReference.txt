@@ -1,1 +1,1 @@
-Cube,Assets/Game/Login/AssetsBundle/Login_Bundle/Prefabs/Cube.prefab
+LoginPanel,Assets/Game/Login/AssetsBundle/Login_Bundle/Panels/LoginPanel.prefab

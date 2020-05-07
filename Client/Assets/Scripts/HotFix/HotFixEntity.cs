@@ -7,15 +7,19 @@ namespace HotFix
         BaseEntity,
         IFilePathEntity,
         IAssetBundleEntity,
-        ISceneEntity
+        ISceneEntity,
+        IPanelEntity
     {
         public FilePathComponent FilePathComponent { get; private set; }
         public AssetBundleComponent AssetBundleComponent { get; private set; }
         public SceneComponent SceneComponent { get; private set; }
+        public PanelComponent PanelComponent { get; private set; }
 
         public void Awake()
         {
             InitEntity();
+            PanelComponent.CreateUIGroup();
+
             Global.LoadScene<LoginSceneEntity>("Login", "login_scene");
         }
 
@@ -26,6 +30,7 @@ namespace HotFix
             FilePathComponent = Add<FilePathComponent, IFilePathEntity>(this);
             AssetBundleComponent = Add<AssetBundleComponent, IAssetBundleEntity>(this);
             SceneComponent = Add<SceneComponent, ISceneEntity>(this);
+            PanelComponent = Add<PanelComponent, IPanelEntity>(this);
         }
 
     }

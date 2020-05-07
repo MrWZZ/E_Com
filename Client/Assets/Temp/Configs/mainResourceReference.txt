@@ -1,0 +1,1 @@
+MainPanel,Assets/Game/Main/AssetsBundle/Main_Bundle/Panels/MainPanel.prefab
