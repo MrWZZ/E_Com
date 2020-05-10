@@ -99,7 +99,7 @@ namespace HotFix
         /// <summary>
         /// 卸载场景所依赖的包
         /// </summary>
-        public void _UnLoadDependBundle()
+        private void _UnLoadDependBundle()
         {
             if(dependBundleList.Count > 0)
             {
@@ -108,6 +108,47 @@ namespace HotFix
                     Global.UnLoadAssetsBundle(bundleName);
                 }
             }
+        }
+
+        /// <summary>
+        /// 触发关闭操作
+        /// </summary>
+        public void _OnUnLoad()
+        {
+            _UnLoadDependBundle();
+            RemoveAllEntityEvent();
+        }
+
+        public static void TriggerEvent(string eventName, object args = null)
+        {
+            Global.TriggerEvent(eventName, args);
+        }
+
+        /// <summary>
+        /// 添加事件
+        /// </summary>
+        /// <param name="eventName"></param>
+        /// <param name="eventHandler"></param>
+        public void AddEvent(string eventName, EventComponentHandler eventHandler)
+        {
+            Global.AddEvent(eventName, this, eventHandler);
+        }
+
+        /// <summary>
+        /// 删除指定事件
+        /// </summary>
+        /// <param name="eventName"></param>
+        public void RemoveEvent(string eventName)
+        {
+            Global.RemoveEvent(eventName,this);
+        }
+
+        /// <summary>
+        /// 删除所有事件
+        /// </summary>
+        public void RemoveAllEntityEvent()
+        {
+            Global.RemoveAllEntityEvent(this);
         }
 
     }

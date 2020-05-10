@@ -13,9 +13,9 @@ namespace HotFix
         public CoroutineComponent CoroutineComponent { get; private set; }
 
         private GameObject sceneLoadingPanelPre;
-        private SceneLoadingPanelEntity sceneLoadingPanelEntity;
         private float loadingProgress;
         private bool isInit;
+        private float loadSpeed;
 
         public override void InitScene()
         {
@@ -24,7 +24,7 @@ namespace HotFix
             Global._HotFixEntity.SceneComponent.OnLoadSceneProgress += OnLoadSceneProgress;
             Global._HotFixEntity.SceneComponent.OnLoadSceneEnd += OnLoadSceneEnd;
             LoadGlobalResource();
-
+            loadSpeed = 0.02f;
             Global.LoadScene<LoginSceneEntity>("Login", "login_scene");
         }
 
@@ -41,14 +41,13 @@ namespace HotFix
             if(!isInit) { return; }
 
             loadingProgress = 0;
-            sceneLoadingPanelEntity = Global.OpenPanel<SceneLoadingPanelEntity>(sceneLoadingPanelPre,UILayerEnum.OnlyTop);
+            Global.OpenPanel<SceneLoadingPanelEntity>(sceneLoadingPanelPre,UILayerEnum.OnlyTop);
+            CoroutineComponent.EStartCoroutine("DoingLoadSceneProgress", DoingLoadSceneProgress(), CorMutilEnum.Cover);
         }
 
         private void OnLoadSceneProgress(float progress)
         {
             if (!isInit) { return; }
-
-            sceneLoadingPanelEntity.SetProgressText(progress);
             loadingProgress = progress;
         }
 
@@ -58,16 +57,19 @@ namespace HotFix
                 isInit = true;
                 return; 
             }
-            
-            CoroutineComponent.EStartCoroutine("DoingLoadSceneProgress", DoingLoadSceneProgress(),CorMutilEnum.Cover);
+            loadingProgress = 1;
         }
 
         public IEnumerator DoingLoadSceneProgress()
         {
-            while(loadingProgress <= 1)
+            float tempLoadPro = 0;
+            while(tempLoadPro < 1)
             {
-                loadingProgress += 0.01f;
-                sceneLoadingPanelEntity.SetProgressText(loadingProgress);
+                if(tempLoadPro < loadingProgress)
+                {
+                    tempLoadPro += loadSpeed;
+                    TriggerEvent(OriginSceneEvent.SetProgressText, tempLoadPro);
+                }
                 yield return null;
             }
             Global.ClosePanel("SceneLoadingPanel", UILayerEnum.OnlyTop);

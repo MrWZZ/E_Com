@@ -25,21 +25,33 @@ namespace HotFix
             }
         }
 
+        #region Global
+
+        public static T AddEntity<T>(GameObject attachObj) where T : BaseEntity
+        {
+            T entity = attachObj.AddComponent<T>();
+            if(entity == null)
+            {
+                Log.Error($"依附失败：{attachObj.name},{typeof(T)}");
+            }
+
+            return entity;
+        }
+
+        #endregion
+
+        #region Scene
+
         public static void LoadScene<T>(string sceneName, string sceneBundleName) 
             where T : BaseSceneEntity
         {
             _HotFixEntity.SceneComponent.Load<T>(sceneName, sceneBundleName);
         }
 
-        public static T LoadAsset<T>(string fileName, string bundleName) where T : UnityEngine.Object
-        {
-            return _HotFixEntity.AssetBundleComponent.LoadAsset<T>(fileName, bundleName);
-        }
-
-        public static T OpenPanel<T>(GameObject panelPre, UILayerEnum uiLayer = UILayerEnum.Center, object args = null) 
+        public static void OpenPanel<T>(GameObject panelPre, UILayerEnum uiLayer = UILayerEnum.Center, object args = null) 
             where T : BasePanelEntity
         {
-            return _HotFixEntity.PanelComponent.OpenPanel<T>(panelPre, uiLayer, args);
+            _HotFixEntity.PanelComponent.OpenPanel<T>(panelPre, uiLayer, args);
         }
 
         public static void ClosePanel(string panelName, UILayerEnum uiLayer = UILayerEnum.Center)
@@ -47,6 +59,9 @@ namespace HotFix
             _HotFixEntity.PanelComponent.ClosePanel(panelName, uiLayer);
         }
 
+        #endregion
+
+        #region AssetBundle
         public static void LoadAssetsBundle(string bundleName)
         {
             _HotFixEntity.AssetBundleComponent.LoadAssetsBundle(bundleName);
@@ -58,12 +73,43 @@ namespace HotFix
             _HotFixEntity.AssetBundleComponent.UnLoadAsset(bundleName);
         }
 
+        public static T LoadAsset<T>(string fileName, string bundleName) where T : UnityEngine.Object
+        {
+            return _HotFixEntity.AssetBundleComponent.LoadAsset<T>(fileName, bundleName);
+        }
+        #endregion
+
+        #region Event
+        public static void TriggerEvent(string eventName, object args = null)
+        {
+            _HotFixEntity.EventComponent.TriggerEvent(eventName, args);
+        }
+
+        public static void AddEvent(string eventName, BaseSceneEntity entity, EventComponentHandler eventHandler)
+        {
+            
+            _HotFixEntity.EventComponent.AddEvent(eventName, entity, eventHandler);
+        }
+
+        public static void RemoveEvent(string eventName, BaseSceneEntity entity)
+        {
+            _HotFixEntity.EventComponent.RemoveEvent(eventName, entity);
+            
+        }
+
+        public static void RemoveAllEntityEvent(BaseSceneEntity entity)
+        {
+            _HotFixEntity.EventComponent.RemoveAllEntityEvent(entity);
+        }
+
+        #endregion
     }
 
     public class GlobalConfig
     {
         public bool isOnLine;
         public bool isUseAssetBundle;
+        public bool isShowTestDebug;
         public string serverInitUrl;
         public string clientVersion;
         public string scriptVersion;

@@ -33,6 +33,12 @@ namespace HotFix
         {
             Debug.LogError(e.ToString());
         }
-
+        
+        // 所有框架操作提示
+        public static void Test(string message)
+        {
+            if(!Global.GlobalConfig.isShowTestDebug) { return; }
+            Debug.Log(message);
+        }
     }
 }

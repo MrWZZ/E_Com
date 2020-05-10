@@ -14,11 +14,12 @@ namespace HotFix
         public override void InitPanel(object args = null)
         {
             progressText = GetSR<Text>("progressText");
+            AddEvent(OriginSceneEvent.SetProgressText, SetProgressText);
         }
 
-        public void SetProgressText(float progress)
+        public void SetProgressText(object progress)
         {
-            progressText.text = $"加载中...{Mathf.FloorToInt(progress * 100)}%";
+            progressText.text = $"加载中...{Mathf.FloorToInt((float)progress * 100)}%";
         }
     }
 }

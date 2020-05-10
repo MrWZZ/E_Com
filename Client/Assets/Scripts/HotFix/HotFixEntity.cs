@@ -8,17 +8,21 @@ namespace HotFix
         IFilePathEntity,
         IAssetBundleEntity,
         ISceneEntity,
-        IPanelEntity
+        IPanelEntity,
+        ICoroutineEntity,
+        IEventEntity
     {
         public FilePathComponent FilePathComponent { get; private set; }
         public AssetBundleComponent AssetBundleComponent { get; private set; }
         public SceneComponent SceneComponent { get; private set; }
         public PanelComponent PanelComponent { get; private set; }
+        public EventComponent EventComponent { get; private set; }
+        public CoroutineComponent CoroutineComponent { get; private set; }
 
         public void Awake()
         {
             InitEntity();
-            gameObject.AddComponent<OriginSceneEntity>().InitScene();
+            Global.AddEntity<OriginSceneEntity>(gameObject).InitScene();
         }
 
         public override void InitEntity()
@@ -29,6 +33,8 @@ namespace HotFix
             AssetBundleComponent = Add<AssetBundleComponent, IAssetBundleEntity>(this);
             SceneComponent = Add<SceneComponent, ISceneEntity>(this);
             PanelComponent = Add<PanelComponent, IPanelEntity>(this);
+            CoroutineComponent = Add<CoroutineComponent, ICoroutineEntity>(this);
+            EventComponent = Add<EventComponent, IEventEntity>(this);
         }
 
     }

@@ -67,8 +67,8 @@ namespace HotFix
             GameObject[] gameObjects = curScene.GetRootGameObjects();
             if (gameObjects.Length > 0)
             {
-                CurScene?._UnLoadDependBundle();
-                CurScene = gameObjects[0].AddComponent<T>();
+                CurScene?._OnUnLoad();
+                CurScene = Global.AddEntity<T>(gameObjects[0]);
                 CurScene.InitEntity();
                 CurScene._LoadDependBundle();
                 CurScene.InitScene();

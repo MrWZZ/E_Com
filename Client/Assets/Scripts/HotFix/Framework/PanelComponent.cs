@@ -59,7 +59,7 @@ namespace HotFix
         /// <param name="panelPre">这个页面的预制体</param>
         /// <param name="uiLayer">页面所在的层</param>
         /// <param name="args">打开页面传递的参数</param>
-        public PanelType OpenPanel<PanelType>(GameObject panelPre, UILayerEnum uiLayer = UILayerEnum.Center, object args = null) where PanelType : BasePanelEntity
+        public void OpenPanel<PanelType>(GameObject panelPre, UILayerEnum uiLayer = UILayerEnum.Center, object args = null) where PanelType : BasePanelEntity
         {
             var panelData = uiLayerDic[uiLayer];
 
@@ -77,14 +77,12 @@ namespace HotFix
 
             // 触发页面打开
             var panelObj = Instantiate(panelPre, panelData.uiLayerContainer.transform);
-            PanelType panelEntity = panelObj.AddComponent<PanelType>();
+            PanelType panelEntity = Global.AddEntity<PanelType>(panelObj);
             panelData.panelEntitys.Add(panelPre.name, panelEntity);
             panelEntity.InitEntity();
             panelEntity._LoadDependBundle();
             panelEntity.InitScene();
             panelEntity.InitPanel(args);
-
-            return panelEntity;
         }
 
         /// <summary>
@@ -98,7 +96,7 @@ namespace HotFix
             if (!panelData.panelEntitys.ContainsKey(panelName)) { return; }
 
             // 触发页面关闭
-            panelData.panelEntitys[panelName]._UnLoadDependBundle();
+            panelData.panelEntitys[panelName]._OnUnLoad();
 
             DestroyImmediate(panelData.panelEntitys[panelName].gameObject);
             panelData.panelEntitys.Remove(panelName);
