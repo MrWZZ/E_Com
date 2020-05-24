@@ -1,1 +1,3 @@
 LoginPanel,Assets/Game/Login/AssetsBundle/Login_Bundle/Panels/LoginPanel.prefab
+LoginSettingPanel,Assets/Game/Login/AssetsBundle/Login_Bundle/Panels/LoginSettingPanel.prefab
+SelectSavesPanel,Assets/Game/Login/AssetsBundle/Login_Bundle/Panels/SelectSavesPanel.prefab

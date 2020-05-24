@@ -110,9 +110,10 @@ namespace HotFix
         public void CloseAllLayerPanel(UILayerEnum uiLayer)
         {
             var panelData = uiLayerDic[uiLayer];
-            foreach (var panels in panelData.panelEntitys)
+            var keysArr = panelData.panelEntitys.Keys.ToArray();
+            foreach (var key in keysArr)
             {
-                ClosePanel(panels.Key, uiLayer);
+                ClosePanel(key, uiLayer);
             }
         }
 

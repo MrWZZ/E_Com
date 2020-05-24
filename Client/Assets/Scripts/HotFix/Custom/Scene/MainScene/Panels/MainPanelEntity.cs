@@ -12,13 +12,12 @@ namespace HotFix
     {
         public override void InitPanel(object args = null)
         {
-            SetClick("Button", OnClickButton);
+            SetClick("settingButton", OnClickSettingButton);
         }
 
-        public void OnClickButton()
+        public void OnClickSettingButton()
         {
-            Global.LoadScene<LoginSceneEntity>("Login","login_scene");
-            Global.ClosePanel("MainPanel");
+            TriggerEvent(MainSceneEvent.OpenMainPanel, MainPanelsEnum.MainSettingPanel);
         }
     }
 }

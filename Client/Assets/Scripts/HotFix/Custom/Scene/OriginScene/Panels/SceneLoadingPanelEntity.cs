@@ -17,7 +17,7 @@ namespace HotFix
             AddEvent(OriginSceneEvent.SetProgressText, SetProgressText);
         }
 
-        public void SetProgressText(object progress)
+        public void SetProgressText(object progress,object argsEx = null)
         {
             progressText.text = $"加载中...{Mathf.FloorToInt((float)progress * 100)}%";
         }

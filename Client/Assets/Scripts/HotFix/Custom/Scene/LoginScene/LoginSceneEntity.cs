@@ -8,12 +8,16 @@ using UnityEngine;
 
 namespace HotFix
 {
-    public class LoginSceneEntity : BaseSceneEntity
+    public class LoginSceneEntity : BaseSceneEntity,
+        ILoginPanelsEntity
     {
+        public LoginPanelsComponent LoginPanelsComponent { get; private set; }
+
         public override void InitScene()
         {
-            var loginPanel = Global.LoadAsset<GameObject>("LoginPanel", "login");
-            Global.OpenPanel<LoginPanelEntity>(loginPanel);
+            LoginPanelsComponent = Add<LoginPanelsComponent, ILoginPanelsEntity>(this);
+
+            LoginPanelsComponent.OpenPanel(LoginPanelsEnum.LoginPanel);
         }
 
     }

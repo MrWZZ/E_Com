@@ -59,6 +59,11 @@ namespace HotFix
             _HotFixEntity.PanelComponent.ClosePanel(panelName, uiLayer);
         }
 
+        public static void CloseAllPanel()
+        {
+            _HotFixEntity.PanelComponent.CloseAllPanel();
+        }
+
         #endregion
 
         #region AssetBundle
@@ -80,9 +85,9 @@ namespace HotFix
         #endregion
 
         #region Event
-        public static void TriggerEvent(string eventName, object args = null)
+        public static void TriggerEvent(string eventName, object args = null,object argsEx = null)
         {
-            _HotFixEntity.EventComponent.TriggerEvent(eventName, args);
+            _HotFixEntity.EventComponent.TriggerEvent(eventName, args, argsEx);
         }
 
         public static void AddEvent(string eventName, BaseSceneEntity entity, EventComponentHandler eventHandler)

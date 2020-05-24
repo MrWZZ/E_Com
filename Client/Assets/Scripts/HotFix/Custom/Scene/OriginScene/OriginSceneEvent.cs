@@ -9,5 +9,7 @@ namespace HotFix
     public static class OriginSceneEvent
     {
         public static string SetProgressText = "SetProgressText";
+        public static string OpenOriginPanel = "OpenOriginPanel";
+        public static string CloseOriginPanel = "CloseOriginPanel";
     }
 }
