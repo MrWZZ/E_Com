@@ -11,15 +11,14 @@ namespace HotFix
     {
         public static HotFixEntity _HotFixEntity;
 
-        private static GlobalConfig globalConfig;
-        public static GlobalConfig GlobalConfig
+        private static GlobalDataObject globalConfig;
+        public static GlobalDataObject GlobalConfig
         {
             get
             {
                 if(globalConfig == null)
                 {
-                    TextAsset json = Resources.Load<TextAsset>("GlobalConfig");
-                    globalConfig = JsonUtility.FromJson<GlobalConfig>(json.text);
+                    globalConfig = Resources.Load<GlobalDataObject>("GlobalDataObject");
                 }
                 return globalConfig;
             }
@@ -105,13 +104,4 @@ namespace HotFix
         #endregion
     }
 
-    public class GlobalConfig
-    {
-        public bool isOnLine;
-        public bool isUseAssetBundle;
-        public bool isShowTestDebug;
-        public string serverInitUrl;
-        public string clientVersion;
-        public string scriptVersion;
-    }
 }

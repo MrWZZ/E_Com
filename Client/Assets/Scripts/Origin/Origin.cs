@@ -9,35 +9,18 @@ using UnityEngine.Networking;
 
 public class Origin : MonoBehaviour
 {
-    //private Version newestDllVersion;
-    private GlobalConfig globalConfig;
-
-    public struct GlobalConfig
-    {
-        public bool isUseDll;
-        public string serverInitUrl;
-        public string clientVersion;
-        public string scriptVersion;
-    }
-
-    public class Struct_init
-    {
-        public string client_version;
-        public string client_url;
-        public string dll_version;
-        public string dll_url;
-    }
 
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
 
-        TextAsset config = Resources.Load<TextAsset>("GlobalConfig");
-        globalConfig = JsonUtility.FromJson<GlobalConfig>(config.text);
+        GlobalDataObject dataObject = Resources.Load<GlobalDataObject>("GlobalDataObject");
+        
 
-        if (globalConfig.isUseDll)
+        if (dataObject.isUseDll)
         {
             Debug.Log("use DLL");
+            //TODO 加载资源DLL
         }
         else
         {

@@ -16,15 +16,21 @@ namespace HotFix
 
     public class AssetBundleComponent : BaseComponent<IAssetBundleEntity>
     {
+        // TODO:依赖加载
         private AssetBundleManifest AssetBundleManifest;
         private Dictionary<string, AssetBundle> assetbundleDic;
+        // 不使用assetbundle加载时，保存本都文件的路径
         private Dictionary<string, Dictionary<string, UnityEngine.Object>> bundle_NamePath;
 
         public override void InitComponent()
         {
             assetbundleDic = new Dictionary<string, AssetBundle>();
-
-            if(!Global.GlobalConfig.isUseAssetBundle)
+            
+            if(Global.GlobalConfig.isUseAssetBundle)
+            {
+                LoadAssetBundleManifest();
+            }
+            else
             {
                 bundle_NamePath = new Dictionary<string, Dictionary<string, Object>>();
             }
@@ -189,5 +195,16 @@ namespace HotFix
             return loadObj;
         }
 
+        private void LoadAssetBundleManifest()
+        {
+            string platformAbm = Global.GlobalConfig.assetBundleManifestName;
+            AssetBundle abm = LoadAssetsBundle(platformAbm);
+            if(abm == null)
+            {
+                return;
+            }
+            AssetBundleManifest = abm.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
+            UnLoadAssetBundle(platformAbm);
+        }
     }
 }
