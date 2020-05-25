@@ -8,7 +8,13 @@ using UnityEngine.UI;
 
 namespace HotFix
 {
-    public abstract class BaseSceneEntity : BaseEntity
+    public interface IBaseSceneEntity
+    {
+        void AddEvent(string eventName, EventComponentHandler eventHandler);
+        void TriggerEvent(string eventName, object args = null,object argsEx = null);
+    }
+
+    public abstract class BaseSceneEntity : BaseEntity, IBaseSceneEntity
     {
         private Dictionary<string, List<GameObject>> sceneReferenceDic;
         private List<string> dependBundleList;
@@ -119,9 +125,9 @@ namespace HotFix
             RemoveAllEntityEvent();
         }
 
-        public static void TriggerEvent(string eventName, object args = null)
+        public void TriggerEvent(string eventName, object args = null,object argsEx = null)
         {
-            Global.TriggerEvent(eventName, args);
+            Global.TriggerEvent(eventName, args, argsEx);
         }
 
         /// <summary>

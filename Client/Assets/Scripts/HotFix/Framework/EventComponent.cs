@@ -14,56 +14,33 @@ namespace HotFix
         EventComponent EventComponent { get; }
     }
 
-    public delegate void EventComponentHandler(object args);
+    public delegate void EventComponentHandler(object args,object argsEx);
     public class EventComponent : BaseComponent<IEventEntity>
     {
         private Dictionary<string, Dictionary<int, EventComponentHandler>> eventDic;
         private Dictionary<int, List<string>> entityEventDic;
-        // 等待触发的事件消息
-        private Dictionary<string, List<object>> waitTriggerMessageDic;
-        // 等待清除的时间
-        private float waitTime;
 
         public override void InitComponent()
         {
             eventDic = new Dictionary<string, Dictionary<int, EventComponentHandler>>();
             entityEventDic = new Dictionary<int, List<string>>();
-            waitTriggerMessageDic = new Dictionary<string, List<object>>();
-            waitTime = 5f;
-            Entity.CoroutineComponent.EStartCoroutine("DoingEventClear", DoingEventClear());
         }
 
         /// <summary>
-        /// 触发事件,如果触发时，尚未有人监听，则保留一段时间，等待第一个注册时触发
+        /// 触发事件
         /// </summary>
         /// <param name="eventName"></param>
         /// <param name="args"></param>
-        public void TriggerEvent(string eventName, object args = null)
+        public void TriggerEvent(string eventName, object args = null,object argsEx = null)
         {
             Dictionary<int, EventComponentHandler> curEventDic;
             eventDic.TryGetValue(eventName, out curEventDic);
 
-            // 如果事件为被监听，保留这个事件一段时间
-            if(curEventDic == null)
-            {
-                List<object> curSaveList;
-                waitTriggerMessageDic.TryGetValue(eventName, out curSaveList);
-                if(curSaveList == null)
-                {
-                    curSaveList = new List<object>();
-                    waitTriggerMessageDic.Add(eventName, curSaveList);
-                }
-                else
-                {
-                    curSaveList.Add(args);
-                }
-                return;
-            }
-            else
+            if(curEventDic != null)
             {
                 foreach (var handler in curEventDic)
                 {
-                    handler.Value.Invoke(args);
+                    handler.Value.Invoke(args, argsEx);
                 }
             }
         }
@@ -78,18 +55,6 @@ namespace HotFix
             {
                 curEventDic = new Dictionary<int, EventComponentHandler>();
                 eventDic.Add(eventName, curEventDic);
-
-                // 查看是否有保留的等待触发通知
-                List<object> curWaitList;
-                waitTriggerMessageDic.TryGetValue(eventName, out curWaitList);
-                if(curWaitList != null)
-                {
-                    foreach (var message in curWaitList)
-                    {
-                        eventHandler.Invoke(message);
-                    }
-                    waitTriggerMessageDic.Remove(eventName);
-                }
             }
 
             int entityHashCode = entity.GetHashCode();
@@ -183,14 +148,5 @@ namespace HotFix
             }
         }
 
-        private IEnumerator DoingEventClear()
-        {
-            var perWaitTime = new WaitForSecondsRealtime(waitTime);
-            while(true)
-            {
-                yield return perWaitTime;
-                waitTriggerMessageDic.Clear();
-            }
-        }
     }
 }

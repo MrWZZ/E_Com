@@ -63,6 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\HotFix\Custom\Common\Custom.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\Common\CustomScenes.cs" />
     <Compile Include="Assets\Scripts\HotFix\Custom\CommonComponent\BaseStatusComponent.cs" />
     <Compile Include="Assets\Scripts\HotFix\Custom\CommonComponent\GroupTestComponent.cs" />
     <Compile Include="Assets\Scripts\HotFix\Custom\CommonComponent\GroupTestOperate\BoxGroupTestOperate.cs" />
@@ -79,13 +81,22 @@
     <Compile Include="Assets\Scripts\HotFix\Custom\Player\PlayerEntity.cs" />
     <Compile Include="Assets\Scripts\HotFix\Custom\Player\PlayerKeyboardControlComponent.cs" />
     <Compile Include="Assets\Scripts\HotFix\Custom\Player\PlayerStatusComponent.cs" />
-    <Compile Include="Assets\Scripts\HotFix\Custom\Scene\LoginScene\LoginPanelEntity.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\Scene\LoginScene\LoginPanelsComponent.cs" />
     <Compile Include="Assets\Scripts\HotFix\Custom\Scene\LoginScene\LoginSceneEntity.cs" />
-    <Compile Include="Assets\Scripts\HotFix\Custom\Scene\MainScene\MainPanelEntity.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\Scene\LoginScene\LoginSceneEvent.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\Scene\LoginScene\Panels\LoginPanelEntity.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\Scene\LoginScene\Panels\LoginSettingPanelEntity.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\Scene\LoginScene\Panels\SelectSavesPanelEntity.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\Scene\MainScene\MainPanelsComponent.cs" />
     <Compile Include="Assets\Scripts\HotFix\Custom\Scene\MainScene\MainSceneEntity.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\Scene\MainScene\MainSceneEvent.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\Scene\MainScene\Panels\MainPanelEntity.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\Scene\MainScene\Panels\MainSettingPanelEntity.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\Scene\OriginScene\OriginPanelsComponent.cs" />
     <Compile Include="Assets\Scripts\HotFix\Custom\Scene\OriginScene\OriginSceneEntity.cs" />
     <Compile Include="Assets\Scripts\HotFix\Custom\Scene\OriginScene\OriginSceneEvent.cs" />
-    <Compile Include="Assets\Scripts\HotFix\Custom\Scene\OriginScene\SceneLoadingPanelEntity.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\Scene\OriginScene\Panels\SceneLoadingPanelEntity.cs" />
+    <Compile Include="Assets\Scripts\HotFix\Custom\Scene\OriginScene\ScenesLoadingProgressComponent.cs" />
     <Compile Include="Assets\Scripts\HotFix\Framework\AssetBundleComponent.cs" />
     <Compile Include="Assets\Scripts\HotFix\Framework\Base\BaseComponent.cs" />
     <Compile Include="Assets\Scripts\HotFix\Framework\Base\BaseEntity.cs" />
